@@ -1,0 +1,12 @@
+.uppercase {
+    text-transform: uppercase;
+}
+
+.bg-dark-gray {
+    color: #fff !important;
+    background-color: #333 !important
+}
+
+.btn.bg-dark-gray:hover {
+    color: #aaa !important
+}

@@ -1,0 +1,4 @@
+.idea*
+vendor/uninett-bootstrap-theme/fonts/colfax*
+app/js/auth/*auth.js
+colfax*.*
