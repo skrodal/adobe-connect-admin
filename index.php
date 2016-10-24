@@ -4,12 +4,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="author" content="Simon Skrødal">
 	<link rel="shortcut icon" href="vendor/uninett-bootstrap-theme/ico/favicon.ico">
 	<title>UNINETT - ConnectAdmin</title>
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" href="vendor/uninett-bootstrap-theme/css/uninett.css">
 	<!-- Fonts/AdminLTE -->
@@ -34,63 +33,28 @@
 		<hr>
 		<div id="content" style="display: none;">
 			<?php include_once 'app/elements/userwidget.php'; ?>
+			<?php include_once 'app/elements/orginfo.php'; ?>
 			<?php include_once 'app/elements/quickstats.php'; ?>
 			<?php include_once 'app/elements/globalinfo.php'; ?>
-			<p style="clear: both;"></p>
+			<?php include_once 'app/elements/superinfo.php'; ?>
 
 
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="uninett-color-white uninett-padded gutter">
-						<h2>Fullspan</h2>
-						<p>text.</p>
-					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="uninett-color-white uninett-padded gutter">
-						<h2>1/3</h2>
-						<p>...</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4">
-					<div class="uninett-color-lightGreen uninett-padded gutter">
-						<h2>2/3</h2>
-						<p>...</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4">
-					<div class="uninett-color-white uninett-padded gutter">
-						<h2>3/3</h2>
-						<p>...</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div>
-				</div>
-			</div>
 
-			<hr class="uninett-hr-divider">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="footer-uninett">
-						<div class="footer-content-uninett">
-								<div class="footer-logo"> <img src="vendor/uninett-bootstrap-theme/images/Uninett_pil_rod.svg" alt="Uninett logo" type="image/svg+xml"></div>
-								<div class="footer-uninett-department">UNINETT AS 2016 —</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
+			<?php include_once 'app/elements/footer.php'; ?>
 		</div> <!-- // content -->
 
 	</div> <!-- // container -->
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<!-- JSO -->
+	<!-- 3rd party -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
+
+
+	<!-- Local -->
 	<script src="app/js/auth/jso.min.js"></script>
 	<script src="app/js/auth/dataporten_auth.js"></script>
 	<script src="app/js/etc/config.js"></script>
@@ -98,6 +62,8 @@
 	<script src="app/js/api_consumers/dataporten.js"></script>
 	<script src="app/js/api_consumers/connect.js"></script>
 	<script src="app/js/app.js"></script>
+	<script src="app/js/connect_ui.js"></script>
+
 
 </body>
 </html>

@@ -19,6 +19,14 @@ var UTILS = (function () {
 		$('#modalInfoAlert').modal('show');
 	}
 
+	function timestampNow(){
+		return moment().unix();
+	}
+
+	function timestampMinusDays(days){
+		return moment().subtract(days, 'days').unix();
+	}
+
 
 	function secToTime(totalSec) {
 		var hours = parseInt(totalSec / 3600);
@@ -89,8 +97,14 @@ var UTILS = (function () {
 		timestamp2date : function (timestamp) {
 			var date = new Date(timestamp * 1000);
 			return  UTILS.two(date.getUTCDate()) + '. ' + UTILS.months_short(date.getUTCMonth()) + ' ' + date.getUTCFullYear();
-		}
+		},
 
+		timestampNow: function () {
+			return timestampNow();
+		},
+		timestampMinusDays: function (days) {
+			return timestampMinusDays(days);
+		}
 	}
 })();
 

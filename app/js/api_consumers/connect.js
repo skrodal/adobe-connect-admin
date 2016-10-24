@@ -21,12 +21,15 @@ var CONNECT = (function () {
 
 	/* MEETINGS ROUTES */
 
-	function meetingsStatsXHR(since_days){
-		// Since beginning of time to now
-		var then = 0;
-		var now = Math.floor(Date.now() / 1000);
-		return _callConnectAPI("meetings/stats/from/"+then+"/to/"+now+"/");
+	function meetingsStatsInPeriodXHR(from, to){
+		return _callConnectAPI("meetings/stats/from/"+from+"/to/"+now+"/");
 	}
+
+	function meetingsStatsInPeriodForOrgXHR(from, to, org){
+		return _callConnectAPI("meetings/stats/from/"+from+"/to/"+to+"/org/" + org + "/");
+	}
+
+
 
 	/* ROOMS ROUTES */
 
@@ -46,6 +49,10 @@ var CONNECT = (function () {
 
 	function usersCountXHR(){
 		return _callConnectAPI("users/count/");
+	}
+
+	function usersOrgCountXHR(org){
+		return _callConnectAPI("users/"+org+"/count/");
 	}
 
 	function usersMaxConcurrentSinceDaysXHR(days){
@@ -84,12 +91,17 @@ var CONNECT = (function () {
 		roomsCountTotalXHR: function () {
 			return roomsCountTotalXHR();
 		},
-		// TODO: NEEDS WORK ON API!
-		meetingsStatsXHR: function () {
-			return meetingsStatsXHR();
+		meetingsStatsInPeriodXHR: function (from, to) {
+			return meetingsStatsInPeriodXHR(from, to);
+		},
+		meetingsStatsInPeriodForOrgXHR: function (from, to, org) {
+			return meetingsStatsInPeriodForOrgXHR(from, to, org);
 		},
 		usersCountXHR: function () {
 			return usersCountXHR();
+		},
+		usersOrgCountXHR: function (org) {
+			return usersOrgCountXHR(org);
 		},
 		usersMaxConcurrentSinceDaysXHR: function (days) {
 			return usersMaxConcurrentSinceDaysXHR(days);

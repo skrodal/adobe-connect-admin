@@ -1,4 +1,4 @@
-<p class="page-header text-muted uppercase">Bruksmønster</p>
+<h4 class="uppercase text-muted">Bruksmønster</h4>
 
 <div class="row">
 	<div class="col-lg-6">

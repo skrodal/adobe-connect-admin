@@ -10,3 +10,7 @@
 .btn.bg-dark-gray:hover {
     color: #aaa !important
 }
+
+.dontShow {
+    visibility: hidden;
+}

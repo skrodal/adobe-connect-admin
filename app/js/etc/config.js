@@ -11,10 +11,11 @@ var CONFIG = (function () {
 	(function () {
 		// Charts.js global config
 		//Chart.defaults.global.responsive = true;
+
 	})()
 
 	$(document).ready(function () {
-
+		new Clipboard('.btn');
 	});
 
 	return {

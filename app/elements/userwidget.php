@@ -1,4 +1,4 @@
-<p class="page-header text-muted text-center uppercase">Min Bruker</p>
+<p class="page-header text-muted text-center uppercase">Bruker</p>
 
 <div class="row">
     <div class="col-md-3"></div>
@@ -7,7 +7,7 @@
         <div class="box box-widget widget-user">
             <div class="widget-user-header bg-dark-gray">
                 <h3 class="widget-user-username userFullName"><!--></h3>
-                <h5 class="widget-user-desc"><span class="userRole"><!--></span> for <span class="feideOrg"><!--></span></h5>
+                <h5 class="widget-user-desc"><span class="feideOrg"><!--></span></h5>
             </div>
 
             <div class="widget-user-image">
@@ -18,26 +18,42 @@
                 <div class="row">
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
-                            <h5 class="description-header xhr meHasAccount"></h5>
+                            <h5 class="description-header xhr meHasAccount" style="padding-bottom: 5px;"><!--></h5>
                             <span class="description-text">Konto</span>
                         </div><!-- /.description-block -->
                     </div><!-- /.col -->
 
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
-                            <h5 class="description-header xhr meRoomsCount"></h5>
+                            <h5 class="description-header xhr meRoomsCount" style="padding-bottom: 5px;"><!--></h5>
                             <span class="description-text">Møterom</span>
                         </div><!-- /.description-block -->
                     </div><!-- /.col -->
 
                     <div class="col-sm-4">
                         <div class="description-block">
-                            <h5 class="description-header"><span class="userRole"><!--></span> &nbsp;<sup style="cursor: help;" class="ion ion-information-circled text-blue userRoleDescription" data-toggle="tooltip" data-placement="top" title="Tilgang"></sup></h5>
+                            <h5 class="description-header" style="padding-bottom: 5px;"><span class="userRole userRoleDescription" data-toggle="tooltip" data-placement="top" title="Tilgang" style="border-bottom: 2px dotted orange"><!--></span></h5>
                             <span class="description-text">Rolle</span>
                         </div><!-- /.description-block -->
                     </div>
                           <!-- /.col -->
                 </div><!-- /.row -->
+            </div>
+
+            <div class="box-footer small" style="padding: 10px;">
+                <div class="isAdmin collapse">
+                    <p class="text-muted">Inviter andre berettigede fra <span class="feideOrg"></span> til bli OrgAdmin:</p>
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="inviteURL" type="text" class="form-control inviteURL" readonly style="background-color: #FFF;">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info btn-flat" data-clipboard-target="#inviteURL" data-toggle="tooltip" data-placement="top" title="Kopier"><i class="ion ion-clipboard"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="isGuest collapse">
+                    <span class="text-muted">Dersom du trenger tilgang som OrgAdmin, send en epost til <span class="supportEmail"><!--></span></span>
+                </div>
+
             </div>
 
 

@@ -1,5 +1,5 @@
 <!-- ERROR MODAL -->
-<div id="modalErrorAlert" class="modal">
+<div id="modalErrorAlert" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header uninett-color-red">
@@ -17,7 +17,7 @@
 </div><!-- /.modal -->
 
 <!-- INFO MODAL -->
-<div id="modalInfoAlert" class="modal">
+<div id="modalInfoAlert" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header bg-blue">
