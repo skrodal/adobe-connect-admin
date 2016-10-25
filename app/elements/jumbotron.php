@@ -1,4 +1,4 @@
-<div class="row">
+<div id="jumbotron" class="row">
 	<div class="col-lg-12">
 		<div class="jumbotron uninett-padded gutter" style="background-color: #eee">
 			<h1><span class="uninett-fontColor-red">UNINETT ConnectAdmin</span></h1>

@@ -1,5 +1,7 @@
 var CONNECT = (function () {
 
+	var defaultDaysInPeriod = 14;
+
 	/* SERVICE ROUTES */
 	function serviceVersionXHR() {
 		return _callConnectAPI("service/version/");
@@ -106,6 +108,9 @@ var CONNECT = (function () {
 		usersMaxConcurrentSinceDaysXHR: function (days) {
 			return usersMaxConcurrentSinceDaysXHR(days);
 		},
+		defaultDaysInPeriod: function () {
+			return 	defaultDaysInPeriod;
+		}
 
 	}
 

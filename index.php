@@ -7,8 +7,9 @@
 	<meta name="author" content="Simon Skrødal">
 	<link rel="shortcut icon" href="vendor/uninett-bootstrap-theme/ico/favicon.ico">
 	<title>UNINETT - ConnectAdmin</title>
-	<!-- Bootstrap -->
+	<!-- 3rd party -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css" />
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" href="vendor/uninett-bootstrap-theme/css/uninett.css">
 	<!-- Fonts/AdminLTE -->
@@ -32,9 +33,9 @@
 		<?php include_once 'app/elements/jumbotron.php'; ?>
 		<hr>
 		<div id="content" style="display: none;">
+			<?php include_once 'app/elements/quickstats.php'; ?>
 			<?php include_once 'app/elements/userwidget.php'; ?>
 			<?php include_once 'app/elements/orginfo.php'; ?>
-			<?php include_once 'app/elements/quickstats.php'; ?>
 			<?php include_once 'app/elements/globalinfo.php'; ?>
 			<?php include_once 'app/elements/superinfo.php'; ?>
 
@@ -50,6 +51,8 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.nb.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
 
@@ -63,6 +66,9 @@
 	<script src="app/js/api_consumers/connect.js"></script>
 	<script src="app/js/app.js"></script>
 	<script src="app/js/connect_ui.js"></script>
+	<script src="app/js/connect_org.js"></script>
+	<script src="app/js/connect_super.js"></script>
+	<script src="app/js/connect_global.js"></script>
 
 
 </body>

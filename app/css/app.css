@@ -11,6 +11,6 @@
     color: #aaa !important
 }
 
-.dontShow {
-    visibility: hidden;
-}
+/* Override AdminLTE and use UNINETT red */
+.box.box-danger{border-top-color:#eb212e}
+

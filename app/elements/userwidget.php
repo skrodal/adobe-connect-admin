@@ -40,9 +40,9 @@
                 </div><!-- /.row -->
             </div>
 
-            <div class="box-footer small" style="padding: 10px;">
+            <div class="box-footer bg-dark-gray small" style="padding: 10px;">
                 <div class="isAdmin collapse">
-                    <p class="text-muted">Inviter andre berettigede fra <span class="feideOrg"></span> til bli OrgAdmin:</p>
+                    <p class="uninett-fontColor-white text-muted">Inviter andre berettigede fra <span class="feideOrg"></span> til bli OrgAdmin:</p>
                     <div class="input-group input-group-sm">
                         <input type="text" id="inviteURL" type="text" class="form-control inviteURL" readonly style="background-color: #FFF;">
                         <span class="input-group-btn">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="isGuest collapse">
-                    <span class="text-muted">Dersom du trenger tilgang som OrgAdmin, send en epost til <span class="supportEmail"><!--></span></span>
+                    <span class="uninett-fontColor-white text-muted">Dersom du trenger tilgang som OrgAdmin, send en epost til <span class="supportEmail"><!--></span></span>
                 </div>
 
             </div>

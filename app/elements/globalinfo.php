@@ -1,52 +1,74 @@
-<h4 class="uppercase text-muted">Bruksmønster</h4>
+<hr>
+<p class="page-header text-muted uppercase label uninett-color-red">Globalt</p>
 
-<div class="row">
-	<div class="col-lg-6">
-		<div class="box box-default">
+<div id="sectionGlobalInfo" class="row">
+	<div class="col-md-12">
+		<div class="box box-danger">
 			<div class="box-header with-border">
-				<h3 class="box-title icon ion-ios-eye"> Observasjoner</h3>
+				<h3 class="box-title">Bruksmønster siste <span class="label bg-aqua orgStatsPeriodDays"><!--></span> dager</h3>
 				<div class="box-tools pull-right">
+					<div class="btn-group">
+						<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-wrench"></i></button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								&nbsp;&nbsp;&nbsp;<span class="ion ion-android-calendar text-light-blue"></span> <button class="btn btn-link btnChangePeriod">Endre periode</button>
+							</li>
+						</ul>
+					</div>
 				</div>
-			</div><!-- /.box-header -->
-
+			</div>
+			<!-- /.box-header -->
 			<div class="box-body">
-				<p>Maks samtidige brukere</p>
-				<p>— Noensinne: <span class="xhr usersMaxConcurrent"><!--></span></p>
-				<p>— Siste <span class="usersMaxConcurrentNumberOfDays"><!--></span> dager: <span class="xhr usersMaxConcurrentSinceDays"><!--></span></p>
-
-            </div><!-- /.box-body -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="chart">
+							<canvas id="globalChart"><!--></canvas>
+						</div><!-- /.chart-responsive -->
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- ./box-body -->
 
 			<div class="box-footer">
-			</div>
-			<!--
+				<p class="text-muted">Total aktivitet i denne perioden:</p>
+				<div class="row">
+					<div class="col-sm-3 col-xs-6">
+						<div class="description-block border-right">
+							<h5 class="description-header xhr globalUserCountPeriod"><!--></h5>
+							<span class="description-text uppercase">Brukere</span>
+						</div><!-- /.description-block -->
+					</div><!-- /.col -->
+
+					<div class="col-sm-3 col-xs-6">
+						<div class="description-block border-right">
+							<h5 class="description-header xhr globalRoomCountPeriod"><!--></h5>
+							<span class="description-text uppercase">Møterom</span>
+						</div><!-- /.description-block -->
+					</div><!-- /.col -->
+
+					<div class="col-sm-3 col-xs-6">
+						<div class="description-block border-right">
+							<h5 class="description-header xhr globalSessionCountPeriod"><!--></h5>
+							<span class="description-text uppercase">Sesjoner</span>
+						</div><!-- /.description-block -->
+					</div><!-- /.col -->
+
+					<div class="col-sm-3 col-xs-6">
+						<div class="description-block">
+							<h5 class="description-header xhr globalMeetingMinutesPeriod"><!--></h5>
+							<span class="description-text uppercase">Tid</span>
+						</div><!-- /.description-block -->
+					</div>
+				</div><!-- /.row -->
+			</div><!-- /.box-footer -->
+
 			<div class="overlay ajax">
 				<i class="fa fa-spinner fa-pulse"></i>
 			</div>
-			-->
-        </div><!-- /.box -->
+		</div><!-- /.box -->
 	</div>
-	<div class="col-lg-6">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<h3 class="box-title icon ion-ios-eye"> Unike visninger siste <span class="hitsLastDaysChartDays"><!----></span> dager</h3>
-				<div class="box-tools pull-right">
-					<span data-toggle="tooltip" data-original-title="Unike visninger for periode totalt" class="badge bg-aqua-gradient hitsLastDaysTotal" ><!-- --></span>
-					<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-				</div>
-			</div><!-- /.box-header -->
 
-			<div class="box-body">
-				<div class="chart" id="hitsLastDaysChart" style="height: 200px;">
-					<!-- AJAX -->
-				</div>
-            </div><!-- /.box-body -->
 
-			<div class="box-footer">
-				<span class="text-muted">Totalt <span class="hitsTotalGlobal"><!--></span> unike visninger siden <span class="hitsFirstRecord"><!--></span></span>
-			</div>
-			<div class="overlay ajax">
-				<i class="fa fa-spinner fa-pulse"></i>
-			</div>
-        </div><!-- /.box -->
-	</div>
+
+
 </div>
