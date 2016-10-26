@@ -15,7 +15,10 @@ var CONNECT_UI = (function () {
 			// Check that logged on user's org is in the list from API
 			if (response.indexOf(DATAPORTEN.user().org.id) >= 0) {
 				$('#sectionOrgInfoAlert').hide();
+				// Start with 14 days of stats for logged on user's home org
 				CONNECT_ORG.updateSelectedOrgSection(UTILS.timestampMinusDays(CONNECT.defaultDaysInPeriod()), UTILS.timestampNow(), DATAPORTEN.user().org.id);
+				// Start with 14 days of global stats
+				CONNECT_GLOBAL.updateGlobalSection(UTILS.timestampMinusDays(CONNECT.defaultDaysInPeriod()), UTILS.timestampNow());
 				$('#sectionOrgInfo').fadeIn();
 			} else {
 				$('#sectionOrgInfoAlert').fadeIn();

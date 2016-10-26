@@ -24,7 +24,7 @@ var CONNECT = (function () {
 	/* MEETINGS ROUTES */
 
 	function meetingsStatsInPeriodXHR(from, to){
-		return _callConnectAPI("meetings/stats/from/"+from+"/to/"+now+"/");
+		return _callConnectAPI("meetings/stats/from/"+from+"/to/"+to+"/");
 	}
 
 	function meetingsStatsInPeriodForOrgXHR(from, to, org){

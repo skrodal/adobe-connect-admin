@@ -36,7 +36,7 @@ var CONNECT_ORG = (function () {
 			$('.selectedOrgUserCount').html(response);
 		});
 
-		// Main source of data - get lots of info about usage within a certain time frame.
+		// Main source of data - get lots of info about ORG usage within a certain time frame.
 		$.when(CONNECT.meetingsStatsInPeriodForOrgXHR(from, to, org)).done(function (response) {
 			$('.selectedOrgUserCountPeriod').html(response.summary.users);
 			$('.selectedOrgRoomCountPeriod').html(response.summary.rooms);
@@ -52,7 +52,7 @@ var CONNECT_ORG = (function () {
 	}
 
 	function buildChartMeetingStatsPeriod(response) {
-		// Destroy existing chart
+		// Destroy potentially existing chart
 		if (selectedOrgChart) {
 			selectedOrgChart.clear();
 			selectedOrgChart.destroy();

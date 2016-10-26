@@ -7,7 +7,9 @@
 
 var CONNECT_GLOBAL = (function () {
 
-	$('#sectionOrgInfo .btnChangePeriod').datepicker({
+	var globalChart = null;
+
+	$('#sectionGlobalInfo .btnChangePeriod').datepicker({
 		format: "dd.mm.yyyy",
 		weekStart: 1,
 		startDate: "01-01-2012",
@@ -18,46 +20,33 @@ var CONNECT_GLOBAL = (function () {
 
 
 	/**
-	 * If SuperAdmin, org can be anything. If logged on user is not SuperAdmin, API will ignore `org` and
-	 * return data for user's home org.
 	 *
 	 * @param from
 	 * @param to
-	 * @param org
 	 */
-	function updateSelectedOrgSection(from, to, org) {
-		$('#sectionOrgInfo').find('.ajax').show();
-		$('.selectedOrg').html(org);
+	function updateGlobalSection(from, to) {
+		$('#sectionGlobalInfo').find('.ajax').show();
 		// TODO: Consider making `to` == from + 7 days.
-		$.when(CONNECT.usersOrgCountXHR(org)).done(function (response) {
-			$('.selectedOrgUserCount').html(response);
-		});
-
-		// Main source of data - get lots of info about usage within a certain time frame.
-		$.when(CONNECT.meetingsStatsInPeriodForOrgXHR(from, to, org)).done(function (response) {
-			$('.selectedOrgUserCountPeriod').html(response.summary.users);
-			$('.selectedOrgRoomCountPeriod').html(response.summary.rooms);
-			$('.selectedOrgSessionCountPeriod').html(response.summary.sessions);
-			$('.selectedOrgMeetingMinutesPeriod').html(UTILS.secToTimeAndDays(response.summary.duration_sec));
+		// Main source of data - get lots of info about GLOBAL usage within a certain time frame.
+		$.when(CONNECT.meetingsStatsInPeriodXHR(from, to)).done(function (response) {
+			$('.globalUserCountPeriod').html(response.summary.users);
+			$('.globalRoomCountPeriod').html(response.summary.rooms);
+			$('.globalSessionCountPeriod').html(response.summary.sessions);
+			$('.globalMeetingMinutesPeriod').html(UTILS.secToTimeAndDays(response.summary.duration_sec));
 			console.log(response);
-			buildChartMeetingStatsPeriod(response);
-			// Calculate this org's percentage of users
-
-
-			var percentage = parseInt( $('.selectedOrgUserCount').html() ) * 100 / parseInt( $('.usersCount').html() );
-			$('.selectedOrgUserCountPercentage').css('width', percentage + '%' );
-			$('#sectionOrgInfo').find('.ajax').fadeOut();
+			buildChartGlobalMeetingStatsPeriod(response);
+			$('#sectionGlobalInfo').find('.ajax').fadeOut();
 		});
 	}
 
-	function buildChartMeetingStatsPeriod(response) {
-		// Destroy existing chart
-		if (selectedOrgChart) {
-			selectedOrgChart.clear();
-			selectedOrgChart.destroy();
+	function buildChartGlobalMeetingStatsPeriod(response) {
+		// Destroy potentially existing chart
+		if (globalChart) {
+			globalChart.clear();
+			globalChart.destroy();
 		}
 		// Chart canvas
-		var selectedOrgChartCanvas = $("#selectedOrgChart");
+		var globalOrgChartCanvas = $("#globalChart");
 		// Datasets
 		var roomsData = [], usersData = [], sessionsData = [], durationData = [], dateLabels = [];
 		$.each(response.daily, function (date, dayObj) {
@@ -69,7 +58,7 @@ var CONNECT_GLOBAL = (function () {
 			dateLabels.push([date, UTILS.secToTimeAndDays(dayObj.duration_sec)]);
 		});
 
-		var selectedOrgChartData = {
+		var globalChartData = {
 			type: 'bar',
 			data: {
 				labels: dateLabels,
@@ -106,14 +95,13 @@ var CONNECT_GLOBAL = (function () {
 			//options: CONFIG.lineChartOptions()
 		};
 		// This will get the first returned node in the jQuery collection.
-		selectedOrgChart = new Chart(selectedOrgChartCanvas, selectedOrgChartData);
+		globalChart = new Chart(globalOrgChartCanvas, globalChartData);
 	}
 
-
-
-
 	return {
-
+		updateGlobalSection: function (from, to) {
+			updateGlobalSection(from, to);
+		},
 		tester: function () {
 			// return tester();
 		}
