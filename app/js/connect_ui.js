@@ -26,9 +26,17 @@ var CONNECT_UI = (function () {
 			}
 			// Update UI elements
 			$('.serviceOrgCount').html(response.length);
-			// Only superadmins
+			// Only SuperAdmin
 			if (DATAPORTEN.user().access.superadmin) {
-				$('.btnShowOrgListing').show();
+				// Show menu item in dropdown for orgStats section
+				$('#orgStatsConfigMenu').find('.btnShowOrgListing').show();
+			}
+			// Minimum OrgAdmin
+			if(DATAPORTEN.user().access.orgadmin){
+				// Show menu dropdown on orgStats section
+				$('#orgStatsConfigMenu').fadeIn();
+				$('#orgStatsConfigMenu').find('.btnExportUserData').show();
+
 			}
 			// Scroll past jumbotron when shit has loaded
 			$('html,body').animate({
@@ -48,8 +56,6 @@ var CONNECT_UI = (function () {
 		$.when(CONNECT.serviceVersionXHR()).done(function (response) {
 			$('.serviceVersion').html('Adobe Connect v.' + response);
 		});
-
-
 		/* GROUP ROUTES */
 
 
@@ -59,18 +65,25 @@ var CONNECT_UI = (function () {
 		});
 
 		$.when(CONNECT.meRoomsXHR()).done(function (response) {
-			// $.each(response, function (index, room) {});
+			// console.log(response);
 			$('.meRoomsCount').html(response.length);
+			if(response.length > 0){
+				// Class pulsate for candy (and alert to the fact that it is clickable)
+				$('.meRoomsCount').addClass('btn btn-lg btn-link badge bg-aqua pulsate');
+				var $table = $('#userRoomsTable');
+				$table.find('tbody').html("");
+				$.each(response, function (index, roomObj) {
+					$table.find('tbody').append("<tr><td><a target='_blank' href='https://connect.uninett.no" + roomObj['url-path'] + "'>" + roomObj.name + "</a></td> <td>" + roomObj.created.split(',')[0] + "</td></tr>");
+				});
+				// Small modal with list of user's meeting rooms
+				$('.meRoomsCount').on('click', function(){
+					$('#modalUser').modal('show');
+				});
+			}
 		});
 
 		/* MEETINGS ROUTES */
-		/* TODO: API NEEDS REWORK - WE WANT TO KEEP RANGE, BUT SHOULD RETURN ONE OBJECT PER DAY
-		 $.when(CONNECT.meetingsStatsXHR()).done(function (response) {
-		 console.log (response);
-		 // Get minutes count, etc
-		 //$('.meetingsMinutes').html(response);
-		 });
-		 */
+
 
 		/* ROOMS ROUTES */
 		$.when(CONNECT.roomsCountTotalXHR()).done(function (response) {
@@ -99,15 +112,6 @@ var CONNECT_UI = (function () {
 			$('.usersMaxConcurrentSinceDays').html(response.count);
 			$('.usersMaxConcurrentNumberOfDays').html(response.since_days);
 		});
-
-
-		/*
-		 $.when(CONNECT.).done(function (response) {
-		 console.log(response);
-		 });
-		 */
-
-
 	}
 
 	return {

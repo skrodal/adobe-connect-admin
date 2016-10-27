@@ -1,6 +1,7 @@
 var CONNECT = (function () {
 
-	var defaultDaysInPeriod = 14;
+	// Results in 14 days (including start/end date)
+	var defaultDaysInPeriod = 13;
 
 	/* SERVICE ROUTES */
 	function serviceVersionXHR() {
@@ -31,6 +32,16 @@ var CONNECT = (function () {
 		return _callConnectAPI("meetings/stats/from/"+from+"/to/"+to+"/org/" + org + "/");
 	}
 
+	/* ORGS ROUTES */
+
+	function orgsCountXHR(){
+		return _callConnectAPI("orgs/users/count/");
+	}
+
+	function orgUsersXHR(org){
+		return _callConnectAPI("org/" + org + "/users/");
+	}
+
 
 
 	/* ROOMS ROUTES */
@@ -54,7 +65,7 @@ var CONNECT = (function () {
 	}
 
 	function usersOrgCountXHR(org){
-		return _callConnectAPI("users/"+org+"/count/");
+		return _callConnectAPI("org/"+org+"/users/count/");
 	}
 
 	function usersMaxConcurrentSinceDaysXHR(days){
@@ -98,6 +109,9 @@ var CONNECT = (function () {
 		},
 		meetingsStatsInPeriodForOrgXHR: function (from, to, org) {
 			return meetingsStatsInPeriodForOrgXHR(from, to, org);
+		},
+		orgUsersXHR: function (org) {
+			return orgUsersXHR(org);
 		},
 		usersCountXHR: function () {
 			return usersCountXHR();

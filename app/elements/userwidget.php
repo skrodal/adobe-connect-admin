@@ -25,14 +25,14 @@
 
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
-                            <h5 class="description-header xhr meRoomsCount" style="padding-bottom: 5px;"><!--></h5>
+                            <h5 class="description-header" style="padding-bottom: 5px;"><button class="btn btn-link xhr meRoomsCount"><!--></button></h5>
                             <span class="description-text">Møterom</span>
                         </div><!-- /.description-block -->
                     </div><!-- /.col -->
 
                     <div class="col-sm-4">
                         <div class="description-block">
-                            <h5 class="description-header" style="padding-bottom: 5px;"><span class="userRole userRoleDescription" data-toggle="tooltip" data-placement="top" title="Tilgang" style="border-bottom: 2px dotted orange"><!--></span></h5>
+                            <h5 class="description-header" style="padding-bottom: 5px;"><span class="userRole userRoleDescription" data-toggle="tooltip" data-placement="top" title="Tilgang" style="border-bottom: 2px dotted lightblue"><!--></span></h5>
                             <span class="description-text">Rolle</span>
                         </div><!-- /.description-block -->
                     </div>
@@ -62,4 +62,30 @@
 
     <div class="col-md-3"></div>
 </div>
+
+
+<div id="modalUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="title">
+	<div class="modal-dialog modal-sm" role="document"> <!-- modal-lg / modal-sm -->
+		<div class="modal-content">
+			<div class="modal-header bg-dark-gray">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+				<h4 id="title" class="modal-title uninett-fontColor-white">Dine møterom</h4>
+			</div>
+
+			<div class="modal-body">
+                <div id="userRoomsTable" class="table-responsive">
+                    <p>Klikk for å åpne rom i ny fane</p>
+                    <table class="table">
+                        <thead><tr><th>Rom</th><th>Opprettet</th></tr></thead>
+                        <tbody><!--></tbody>
+                    </table>
+                </div>
+			</div>
+
+			<div class="modal-footer bg-dark-gray">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 

@@ -1,5 +1,5 @@
 /**
- * app.js will fire functions in here AFTER Dataporten has been checked out.
+ * Functions in here are fired AFTER Dataporten has been checked out.
  *
  * @author Simon Skrodal
  * @since October 2016
@@ -8,15 +8,49 @@
 var CONNECT_ORG = (function () {
 
 	var selectedOrgChart = null;
+	var selectedOrg;
 
-	$('#sectionOrgInfo .btnChangePeriod').datepicker({
+	/**
+	 * Datepicker: Initialise (range)
+	 */
+	$('#sectionOrgInfo .input-daterange ').datepicker({
 		format: "dd.mm.yyyy",
 		weekStart: 1,
 		startDate: "01-01-2012",
+		endDate: moment().format('DD-MM-YYYY'),
 		maxViewMode: 2,
 		language: "nb",
 		autoclose: true
 	});
+
+	/**
+	 * Datepicker: When FROM date changed
+	 */
+	$('.orgPeriodFrom').datepicker()
+		.on('changeDate', function(e) {
+			$('.orgStatsPeriodDays').html(Math.abs(moment($('.orgPeriodFrom').datepicker('getDate')).diff(moment($('.orgPeriodTo').datepicker('getDate')), 'days')) + 1);
+			$('#btnUpdateOrgPeriod').removeClass('disabled');
+		});
+	/**
+	 * Datepicker: When TO date changed
+	 */
+	$('.orgPeriodTo').datepicker()
+		.on('changeDate', function(e) {
+			$('.orgStatsPeriodDays').html(Math.abs(moment($('.orgPeriodFrom').datepicker('getDate')).diff(moment($('.orgPeriodTo').datepicker('getDate')), 'days')) + 1);
+			$('#btnUpdateOrgPeriod').removeClass('disabled');
+		});
+
+	/**
+	 * Datepicker: When update button clicked
+	 */
+	$('#btnUpdateOrgPeriod').on('click', function (){
+		$('#btnUpdateOrgPeriod').addClass('disabled');
+		var from = moment($('.orgPeriodFrom').datepicker('getDate')).unix();
+		var to = moment($('.orgPeriodTo').datepicker('getDate')).unix();
+		// Update chart and stats
+		updateSelectedOrgSection(from, to, selectedOrg);
+	});
+
 
 	/**
 	 * If SuperAdmin, org can be anything. If logged on user is not SuperAdmin, API will ignore `org` and
@@ -28,14 +62,12 @@ var CONNECT_ORG = (function () {
 	 */
 	function updateSelectedOrgSection(from, to, org) {
 		$('#sectionOrgInfo').find('.ajax').show();
+		selectedOrg = org;
 		$('.selectedOrg').html(org);
 		$('.orgStatsPeriodDays').html(Math.abs(moment.unix(from).diff(moment.unix(to), 'days')));
-
-		// TODO: Consider making `to` == from + 7 days.
-		$.when(CONNECT.usersOrgCountXHR(org)).done(function (response) {
-			$('.selectedOrgUserCount').html(response);
-		});
-
+		$('.orgPeriodFrom').datepicker('setDate', moment.unix(from).format('DD.MM.YYYY'));
+		$('.orgPeriodTo').datepicker('setDate', moment.unix(to).format('DD.MM.YYYY'));
+		$('#btnUpdateOrgPeriod').addClass('disabled');
 		// Main source of data - get lots of info about ORG usage within a certain time frame.
 		$.when(CONNECT.meetingsStatsInPeriodForOrgXHR(from, to, org)).done(function (response) {
 			$('.selectedOrgUserCountPeriod').html(response.summary.users);
@@ -45,8 +77,12 @@ var CONNECT_ORG = (function () {
 			console.log(response);
 			buildChartMeetingStatsPeriod(response);
 			// Calculate this org's percentage of users
-			var percentage = parseInt( $('.selectedOrgUserCount').html() ) * 100 / parseInt( $('.usersCount').html() );
-			$('.selectedOrgUserCountPercentage').css('width', percentage + '%' );
+			$.when(CONNECT.usersOrgCountXHR(org)).done(function (response) {
+				$('.selectedOrgUserCount').html(response);
+				var percentage = parseInt(response) * 100 / parseInt( $('.usersCount').html() );
+				$('.selectedOrgUserCountPercentage').css('width', percentage + '%' );
+			});
+
 			$('#sectionOrgInfo').find('.ajax').fadeOut();
 		});
 	}
@@ -113,6 +149,9 @@ var CONNECT_ORG = (function () {
 	return {
 		updateSelectedOrgSection: function (from, to, org) {
 			updateSelectedOrgSection(from, to, org);
+		},
+		selectedOrg: function () {
+			return selectedOrg;
 		}
 	}
 })();

@@ -25,7 +25,7 @@
 			<div class="info-box">
 				<span class="info-box-icon bg-green"><i class="ion ion-university"></i></span>
 				<div class="info-box-content">
-					<button type="button" class="btn btn-xs btn-link pull-right collapse btnShowOrgListing" data-type="orgList" data-toggle="modal" data-target="#modalSuperAdmin">Vis...</button>
+					<button type="button" class="btn btn-xs btn-link pull-right collapse btnShowOrgListing" data-type="orgList" data-toggle="modal" data-target="#modalAdmin">Vis...</button>
 					<span class="info-box-text">Organisasjoner</span>
 					<span class="info-box-number xhr serviceOrgCount"><!-- --><i class="fa fa-clock-o fa-pulse"></i></span>
 				</div><!-- /.info-box-content -->

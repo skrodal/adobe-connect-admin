@@ -37,7 +37,7 @@
 			<?php include_once 'app/elements/userwidget.php'; ?>
 			<?php include_once 'app/elements/orginfo.php'; ?>
 			<?php include_once 'app/elements/globalinfo.php'; ?>
-			<?php include_once 'app/elements/superinfo.php'; ?>
+			<?php include_once 'app/elements/modals.php'; ?>
 
 
 
@@ -67,7 +67,7 @@
 	<script src="app/js/app.js"></script>
 	<script src="app/js/connect_ui.js"></script>
 	<script src="app/js/connect_org.js"></script>
-	<script src="app/js/connect_super.js"></script>
+	<script src="app/js/connect_modals.js"></script>
 	<script src="app/js/connect_global.js"></script>
 
 

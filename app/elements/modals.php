@@ -1,4 +1,4 @@
-<div id="modalSuperAdmin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="title">
+<div id="modalAdmin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="title">
 	<div class="modal-dialog" role="document"> <!-- modal-lg / modal-sm -->
 		<div class="modal-content">
 			<div class="modal-header bg-dark-gray">

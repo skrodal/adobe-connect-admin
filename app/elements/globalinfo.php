@@ -5,14 +5,23 @@
 	<div class="col-md-12">
 		<div class="box box-danger">
 			<div class="box-header with-border">
-				<h3 class="box-title">Bruksmønster siste <span class="label bg-aqua orgStatsPeriodDays"><!--></span> dager</h3>
+				<h3 class="box-title">Bruksmønster i periode <sup class="text-muted text-sm"><span class="globalStatsPeriodDays"><!--></span> dager</sup></h3>
+				<div class="input-daterange input-group" id="datepicker" style="width: 250px;">
+					<span class="input-group-addon">fra </span>
+				    <input type="text" class="input-sm form-control globalPeriodFrom" name="start"/>
+				    <span class="input-group-addon"> til </span>
+				    <input type="text" class="input-sm form-control globalPeriodTo" name="end"/>
+					<span class="input-group-addon">
+						<button id="btnUpdateGlobalPeriod" class="btn btn-xs btn-link ion ion-ios-refresh disabled"></button>
+					</span>
+				</div>
 				<div class="box-tools pull-right">
 					<div class="btn-group">
 						<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-wrench"></i></button>
 						<ul class="dropdown-menu" role="menu">
 							<li>
-								&nbsp;&nbsp;&nbsp;<span class="ion ion-android-calendar text-light-blue"></span> <button class="btn btn-link btnChangePeriod">Endre periode</button>
+
 							</li>
 						</ul>
 					</div>
@@ -24,6 +33,7 @@
 					<div class="col-lg-12">
 						<div class="chart">
 							<canvas id="globalChart"><!--></canvas>
+							<span class="small text-gray pull-right">Høyreklikk for å lagre grafen</span>
 						</div><!-- /.chart-responsive -->
 					</div><!-- /.col -->
 				</div><!-- /.row -->

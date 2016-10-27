@@ -1,5 +1,5 @@
 /**
- * app.js will fire functions in here AFTER Dataporten has been checked out.
+ * Functions in here are fired AFTER Dataporten has been checked out.
  *
  * @author Simon Skrodal
  * @since October 2016
@@ -9,15 +9,48 @@ var CONNECT_GLOBAL = (function () {
 
 	var globalChart = null;
 
-	$('#sectionGlobalInfo .btnChangePeriod').datepicker({
+
+
+	/**
+	 * Datepicker: Initialise (range)
+	 */
+	$('#sectionGlobalInfo .input-daterange ').datepicker({
 		format: "dd.mm.yyyy",
 		weekStart: 1,
 		startDate: "01-01-2012",
+		endDate: moment().format('DD-MM-YYYY'),
 		maxViewMode: 2,
 		language: "nb",
 		autoclose: true
 	});
 
+	/**
+	 * Datepicker: When FROM date changed
+	 */
+	$('.globalPeriodFrom').datepicker()
+		.on('changeDate', function(e) {
+			$('.globalStatsPeriodDays').html(Math.abs(moment($('.globalPeriodFrom').datepicker('getDate')).diff(moment($('.globalPeriodTo').datepicker('getDate')), 'days')) + 1);
+			$('#btnUpdateGlobalPeriod').removeClass('disabled');
+		});
+	/**
+	 * Datepicker: When TO date changed
+	 */
+	$('.globalPeriodTo').datepicker()
+		.on('changeDate', function(e) {
+			$('.globalStatsPeriodDays').html(Math.abs(moment($('.globalPeriodFrom').datepicker('getDate')).diff(moment($('.globalPeriodTo').datepicker('getDate')), 'days')) + 1);
+			$('#btnUpdateGlobalPeriod').removeClass('disabled');
+		});
+
+	/**
+	 * Datepicker: When update button clicked
+	 */
+	$('#btnUpdateGlobalPeriod').on('click', function (){
+		$('#btnUpdateGlobalPeriod').addClass('disabled');
+		var from = moment($('.globalPeriodFrom').datepicker('getDate')).unix();
+		var to = moment($('.globalPeriodTo').datepicker('getDate')).unix();
+		// Update chart and stats
+		updateGlobalSection(from, to);
+	});
 
 	/**
 	 *
@@ -26,7 +59,11 @@ var CONNECT_GLOBAL = (function () {
 	 */
 	function updateGlobalSection(from, to) {
 		$('#sectionGlobalInfo').find('.ajax').show();
-		// TODO: Consider making `to` == from + 7 days.
+		$('.globalStatsPeriodDays').html(Math.abs(moment.unix(from).diff(moment.unix(to), 'days')));
+		$('.globalPeriodFrom').datepicker('setDate', moment.unix(from).format('DD.MM.YYYY'));
+		$('.globalPeriodTo').datepicker('setDate', moment.unix(to).format('DD.MM.YYYY'));
+		$('#btnUpdateGlobalPeriod').addClass('disabled');
+
 		// Main source of data - get lots of info about GLOBAL usage within a certain time frame.
 		$.when(CONNECT.meetingsStatsInPeriodXHR(from, to)).done(function (response) {
 			$('.globalUserCountPeriod').html(response.summary.users);
