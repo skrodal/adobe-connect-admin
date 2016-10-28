@@ -6,9 +6,8 @@
  */
 
 var CONNECT_ORG = (function () {
-
 	var selectedOrgChart = null;
-	var selectedOrg;
+	var selectedOrgStatsData = null;
 
 	/**
 	 * Datepicker: Initialise (range)
@@ -48,7 +47,7 @@ var CONNECT_ORG = (function () {
 		var from = moment($('.orgPeriodFrom').datepicker('getDate')).unix();
 		var to = moment($('.orgPeriodTo').datepicker('getDate')).unix();
 		// Update chart and stats
-		updateSelectedOrgSection(from, to, selectedOrg);
+		updateSelectedOrgSection(from, to, selectedOrgStatsData.requested_org);
 	});
 
 
@@ -62,7 +61,6 @@ var CONNECT_ORG = (function () {
 	 */
 	function updateSelectedOrgSection(from, to, org) {
 		$('#sectionOrgInfo').find('.ajax').show();
-		selectedOrg = org;
 		$('.selectedOrg').html(org);
 		$('.orgStatsPeriodDays').html(Math.abs(moment.unix(from).diff(moment.unix(to), 'days')));
 		$('.orgPeriodFrom').datepicker('setDate', moment.unix(from).format('DD.MM.YYYY'));
@@ -70,11 +68,13 @@ var CONNECT_ORG = (function () {
 		$('#btnUpdateOrgPeriod').addClass('disabled');
 		// Main source of data - get lots of info about ORG usage within a certain time frame.
 		$.when(CONNECT.meetingsStatsInPeriodForOrgXHR(from, to, org)).done(function (response) {
+			// console.log(response);
+			// Store data for currently selected org
+			selectedOrgStatsData = response;
 			$('.selectedOrgUserCountPeriod').html(response.summary.users);
 			$('.selectedOrgRoomCountPeriod').html(response.summary.rooms);
 			$('.selectedOrgSessionCountPeriod').html(response.summary.sessions);
 			$('.selectedOrgMeetingMinutesPeriod').html(UTILS.secToTimeAndDays(response.summary.duration_sec));
-			console.log(response);
 			buildChartMeetingStatsPeriod(response);
 			// Calculate this org's percentage of users
 			$.when(CONNECT.usersOrgCountXHR(org)).done(function (response) {
@@ -151,7 +151,10 @@ var CONNECT_ORG = (function () {
 			updateSelectedOrgSection(from, to, org);
 		},
 		selectedOrg: function () {
-			return selectedOrg;
+			return selectedOrgStatsData.requested_org;
+		},
+		selectedOrgStatsData: function () {
+			return selectedOrgStatsData;
 		}
 	}
 })();

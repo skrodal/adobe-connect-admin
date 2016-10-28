@@ -9,11 +9,11 @@ var CONNECT_UI = (function () {
 	var connectOrgList = null;
 
 	function start() {
-		$.when(CONNECT.groupsListOrgXHR()).done(function (response) {
+		$.when(CONNECT.orgsUsersCountXHR()).done(function (response) {
 			// Keep indexed array of org ids
 			connectOrgList = response;
 			// Check that logged on user's org is in the list from API
-			if (response.indexOf(DATAPORTEN.user().org.id) >= 0) {
+			if (response.hasOwnProperty(DATAPORTEN.user().org.id)) {
 				$('#sectionOrgInfoAlert').hide();
 				// Start with 14 days of stats for logged on user's home org
 				CONNECT_ORG.updateSelectedOrgSection(UTILS.timestampMinusDays(CONNECT.defaultDaysInPeriod()), UTILS.timestampNow(), DATAPORTEN.user().org.id);
@@ -25,18 +25,18 @@ var CONNECT_UI = (function () {
 				$('#sectionOrgInfo').hide();
 			}
 			// Update UI elements
-			$('.serviceOrgCount').html(response.length);
+			$('.serviceOrgCount').html(Object.keys(response).length);
 			// Only SuperAdmin
 			if (DATAPORTEN.user().access.superadmin) {
 				// Show menu item in dropdown for orgStats section
-				$('#orgStatsConfigMenu').find('.btnShowOrgListing').show();
+				$('.btnShowOrgListing').show();
 			}
 			// Minimum OrgAdmin
 			if(DATAPORTEN.user().access.orgadmin){
-				// Show menu dropdown on orgStats section
+				// Show menu dropdown items in orgStats section
 				$('#orgStatsConfigMenu').fadeIn();
 				$('#orgStatsConfigMenu').find('.btnExportUserData').show();
-
+				$('#orgStatsConfigMenu').find('.btnExportStatsData').show();
 			}
 			// Scroll past jumbotron when shit has loaded
 			$('html,body').animate({

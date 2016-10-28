@@ -34,9 +34,15 @@
 								<li class="btnShowOrgListing collapse">
 									&nbsp;&nbsp;&nbsp;<span class="ion ion-university text-light-blue"></span> <button class="btn btn-link" data-type="orgList" data-toggle="modal" data-target="#modalAdmin">Endre org</button>
 								</li>
+								<li class="divider"></li>
+								<li>&nbsp;&nbsp;&nbsp;<span class="text-muted">Eksport: </span></li>
+								<li class="divider"></li>
 								<!-- OrgAdmins only -->
+								<li class="btnExportStatsData collapse">
+									&nbsp;&nbsp;&nbsp;<span class="ion ion-stats-bars text-light-blue"></span> <button class="btn btn-link" data-type="statsExportOrg" data-toggle="modal" data-target="#modalAdmin">Stats</button>
+								</li>
 								<li class="btnExportUserData collapse">
-									&nbsp;&nbsp;&nbsp;<span class="ion ion-ios-people text-light-blue"></span> <button class="btn btn-link" data-type="userExport" data-toggle="modal" data-target="#modalAdmin">Brukerliste</button>
+									&nbsp;&nbsp;&nbsp;<span class="ion ion-ios-people text-light-blue"></span> <button class="btn btn-link" data-type="userExportOrg" data-toggle="modal" data-target="#modalAdmin">Brukerliste</button>
 								</li>
 							</ul>
 						</div>

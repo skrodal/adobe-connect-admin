@@ -6,21 +6,8 @@
  */
 
 var APP = (function () {
-
-	var jsonEditor;
-
 	// Startup
 	$(document).ready(function () {
-		/**
-		 // Single instance, shared by all
-		 jsonEditor = new JSONEditor(document.getElementById('jsonDataExport'), {
-			"modes": ["view", "text"],
-			"mode": "text",
-			"search": true,
-			"indentation": 4
-		});
-		 **/
-
 		// Spinners for data we don't have yet
 		$('.xhr').html('<i class="fa fa-spinner fa-pulse"></i>');
 		// Stuff from config that is readily available
@@ -80,11 +67,6 @@ var APP = (function () {
 		DP_AUTH.logout();
 	});
 
-	return {
-		jsonEditor: function () {
-			return jsonEditor;
-		}
-	}
 })();
 
 

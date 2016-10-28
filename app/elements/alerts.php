@@ -10,6 +10,7 @@
 			<div id="message" class="modal-body"><!-- --></div>
 
 			<div class="modal-footer uninett-color-red">
+				<span class="pull-left small well no-margin bg-gray-light" style="padding: 5px;">Dersom problemet vedvarer, send en epost til  <span class="supportEmail"></span></span>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
 			</div>
 		</div><!-- /.modal-content -->

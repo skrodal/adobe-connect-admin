@@ -21,11 +21,63 @@
 
 
 
-<div id="orgsTable" class="table-responsive collapse">
-	<p>Alle unike organisasjoner funnet i tjenesten (generiske grupper som `student`, `employee`, `affiliate` er ikke tatt med).</p>
+<div id="orgsTable" class="table-responsive display collapse">
+	<p>Alle unike "organisasjoner" funnet i tjenesten — alt etter <code>@</code> i brukernavn...</p>
 	<p>Klikk på en org for mer info...</p>
-	<table class="table">
-		<thead><tr><th>Org</th></tr></thead>
-		<tbody><!--></tbody>
+	<table id="orgsDataTable" class="table table-striped table-hover table-condensed" style="width: 100%">
+		<thead>
+			<tr>
+				<th>Org</th>
+				<th>Brukere</th>
+			</tr>
+		</thead>
+		<tfoot>
+            <tr>
+				<th>Org</th>
+				<th>Brukere</th>
+            </tr>
+        </tfoot>
+	</table>
+</div>
+
+<div id="usersTable" class="table-responsive display collapse">
+	<table id="usersDataTable" class="table table-striped table-hover table-condensed" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Epost</th>
+                <th>Brukernavn</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Navn</th>
+                <th>Epost</th>
+                <th>Brukernavn</th>
+            </tr>
+        </tfoot>
+	</table>
+</div>
+
+<div id="statsTable" class="table-responsive display collapse full-width-chart">
+	<table id="statsDataTable" class="table table-striped table-hover table-condensed" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Dato</th>
+                <th>Rom</th>
+                <th>Brukere</th>
+                <th>Sesjoner</th>
+                <th>Varighet (sekunder)</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Dato</th>
+                <th>Rom</th>
+                <th>Brukere</th>
+                <th>Sesjoner</th>
+	            <th>Varighet (sekunder)</th>
+            </tr>
+        </tfoot>
 	</table>
 </div>

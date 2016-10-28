@@ -20,8 +20,8 @@
 						<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-wrench"></i></button>
 						<ul class="dropdown-menu" role="menu">
-							<li>
-
+							<li class="btnExportStatsData">
+								&nbsp;&nbsp;&nbsp;<span class="ion ion-stats-bars text-light-blue"></span> <button class="btn btn-link" data-type="statsExportGlobal" data-toggle="modal" data-target="#modalAdmin">Stats</button>
 							</li>
 						</ul>
 					</div>

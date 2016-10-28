@@ -8,6 +8,7 @@
 var CONNECT_GLOBAL = (function () {
 
 	var globalChart = null;
+	var globalStatsData = null;
 
 
 
@@ -66,11 +67,12 @@ var CONNECT_GLOBAL = (function () {
 
 		// Main source of data - get lots of info about GLOBAL usage within a certain time frame.
 		$.when(CONNECT.meetingsStatsInPeriodXHR(from, to)).done(function (response) {
+			globalStatsData = response;
+			// console.log(response);
 			$('.globalUserCountPeriod').html(response.summary.users);
 			$('.globalRoomCountPeriod').html(response.summary.rooms);
 			$('.globalSessionCountPeriod').html(response.summary.sessions);
 			$('.globalMeetingMinutesPeriod').html(UTILS.secToTimeAndDays(response.summary.duration_sec));
-			console.log(response);
 			buildChartGlobalMeetingStatsPeriod(response);
 			$('#sectionGlobalInfo').find('.ajax').fadeOut();
 		});
@@ -139,8 +141,8 @@ var CONNECT_GLOBAL = (function () {
 		updateGlobalSection: function (from, to) {
 			updateGlobalSection(from, to);
 		},
-		tester: function () {
-			// return tester();
+		globalStatsData: function () {
+			return globalStatsData;
 		}
 	}
 })();

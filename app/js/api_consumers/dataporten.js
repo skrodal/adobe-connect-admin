@@ -40,6 +40,7 @@ var DATAPORTEN = (function () {
 			url: DP_AUTH.config().dp_endpoints.userinfo,
 			dataType: 'json'
 		}).pipe(function (userData) {
+			// console.log(userData);
 			var user = userData.user;
 			var userObj = {};
 			userObj.org = {};
@@ -79,12 +80,12 @@ var DATAPORTEN = (function () {
 			url: DP_AUTH.config().dp_endpoints.groups + 'me/groups',
 			dataType: 'json'
 		}).pipe(function (groupsData) {
+			// console.log(groupsData);
 			var groupsArr = groupsData;
 			var groupsObj = {};
 			groupsObj.affiliation = null;
 			groupsObj.org = {};
 			groupsObj.org.name = null;
-			console.log(groupsData);
 			if (groupsArr.length === 0) {
 				UTILS.alertError("Mangler rettigheter", "Du har dessverre ikke tilgang til denne tjenesten (fikk ikke tak i din tilhørighet)");
 				return false;

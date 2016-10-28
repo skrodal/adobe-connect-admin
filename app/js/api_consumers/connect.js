@@ -34,7 +34,7 @@ var CONNECT = (function () {
 
 	/* ORGS ROUTES */
 
-	function orgsCountXHR(){
+	function orgsUsersCountXHR(){
 		return _callConnectAPI("orgs/users/count/");
 	}
 
@@ -82,8 +82,8 @@ var CONNECT = (function () {
 				return response.data;
 			})
 			.fail(function (jqXHR, textStatus, error) {
-				var title = "Feil";
-				var message = "<p>Forespørsel <kbd>" + route + "</kbd> feilet med melding: </p><p><code>"  + error + " (" + jqXHR.responseJSON.message + ")</code>.</p> <p>Dersom problemet vedvarer, send en epost til " + CONFIG.CONNECT_SUPPORT_EMAIL() + "</p>";
+				var title = "<kbd>"+error+"</kbd>";
+				var message = "<p>Forespørsel <code>" + route + "</code> feilet med melding: </p><p class='well'>" + JSON.parse(jqXHR.responseText).message + "</p> <p class='text-muted'>Kan hende du nå må laste siden på nytt for å fortsette...</p>";
 				UTILS.alertError(title, message);
 			});
 	}
@@ -112,6 +112,9 @@ var CONNECT = (function () {
 		},
 		orgUsersXHR: function (org) {
 			return orgUsersXHR(org);
+		},
+		orgsUsersCountXHR: function () {
+			return orgsUsersCountXHR();
 		},
 		usersCountXHR: function () {
 			return usersCountXHR();

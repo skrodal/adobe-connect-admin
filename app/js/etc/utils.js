@@ -3,10 +3,6 @@
  */
 
 var UTILS = (function () {
-	// Constants
-	var GB_to_TB = 0.001; // Used in MiB_to_GB to GB_to_TB conversion
-	var MiB_to_GB = 0.001048576; // From MiB to MiB_to_GB
-	var MiB_to_MB = 1.048576; // From Mib to MiB_to_MB
 
 	function alertError(title, message) {
 		$('#modalErrorAlert').find('#title').html(title);
@@ -66,7 +62,7 @@ var UTILS = (function () {
 	function convertDataTablesData(dataObject) {
 		var dataArray = [];
 		$.each(dataObject, function (idx, obj) {
-			dataArray.push($.extend(obj, {name: idx}));
+			dataArray.push($.extend(obj, {key: idx}));
 		});
 		return dataArray;
 	}

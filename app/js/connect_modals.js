@@ -15,13 +15,66 @@ var CONNECT_MODALS = (function () {
 		// Update the modal's content according to type
 		switch (type) {
 			case 'orgList':
-				buildOrgListModal($(this));
+				buildOrgsListingModal($(this));
 				break;
-			case 'userExport':
-				buildUserExportModal($(this));
+			case 'userExportOrg':
+				buildUserListingModal($(this));
+				break;
+			case 'statsExportOrg':
+				buildStatsListingModal($(this), CONNECT_ORG.selectedOrgStatsData().daily, false);
+				break;
+			case 'statsExportGlobal':
+				buildStatsListingModal($(this), CONNECT_GLOBAL.globalStatsData().daily, true);
 				break;
 		}
 	});
+
+
+
+	function buildStatsListingModal($modal, data, isGlobal) {
+
+		$modal.find('#title').html(isGlobal ? "Global periodestatistikk" : "Periodestatistikk for " + CONNECT_ORG.selectedOrg());
+		$modal.find('.modal-dialog').addClass('modal-lg').removeClass('modal-sm');
+		$modal.find('#body').html("Henter....");
+		var $table = $('#statsTable').clone();
+
+		$($table.find('#statsDataTable')).DataTable({
+			// Object key is date, which Datatables does not like, convert the obj to an indexed array
+			data: UTILS.convertDataTablesData(data),
+			language: CONFIG.DATATABLES_LANGUAGE(),
+			columns: [
+				{
+					"data": "key",
+					"defaultContent": " <span class='text-red'>- mangler -</span> "
+				},
+				{
+					"data": "rooms",
+					"defaultContent": " <span class='text-red'>- mangler -</span> "
+				},
+				{
+					"data": "users",
+					"defaultContent": " <span class='text-red'>- mangler -</span> "
+				},
+				{
+					"data": "sessions",
+					"defaultContent": " <span class='text-red'>- mangler -</span> "
+				},
+				{
+					"data": "duration_sec",
+					"defaultContent": " <span class='text-red'>- mangler -</span> "
+				}
+			],
+			dom: 'Bfrtip',
+			buttons: [
+				{extend: 'copyHtml5', text: 'Kopier'},
+				{extend: 'excelHtml5', text: 'Excel'},
+				{extend: 'csvHtml5', text: 'CSV'}
+			]
+		});
+
+		$modal.find('#body').html($table);
+		$table.show();
+	}
 
 	/**
 	 * Fired when show() on modal for user export is triggered
@@ -29,20 +82,42 @@ var CONNECT_MODALS = (function () {
 	 * Safe to use orgList here (otherwise button to show the modal would not exist)
 	 * @param $modal
 	 */
-	function buildUserExportModal($modal) {
+	function buildUserListingModal($modal) {
 		$modal.find('#title').html("Brukere ved " + CONNECT_ORG.selectedOrg());
 		$modal.find('.modal-dialog').addClass('modal-lg').removeClass('modal-sm');
-		$modal.find('#body').html("");
+		$modal.find('#body').html("<p>Henter...</p>");
+		var $table = $('#usersTable').clone();
 
 		$.when(CONNECT.orgUsersXHR(CONNECT_ORG.selectedOrg())).done(function (response) {
-			$.each(response.row, function (index, userObj) {
-				$modal.find('#body').append("<li>" + userObj.name + " (" + userObj.email + ")</li>");
+			// console.log(response.row);
+			$($table.find('#usersDataTable')).DataTable({
+				data: response.row,
+				language : CONFIG.DATATABLES_LANGUAGE(),
+				columns: [
+					{
+						"data": "name",
+						"defaultContent": " <span class='text-red'>- mangler -</span> "
+					},
+					{
+						"data": "email",
+						"defaultContent": " <span class='text-red'>- mangler -</span> "
+					},
+					{
+						"data": "login",
+						"defaultContent": " <span class='text-red'>- mangler -</span> "
+					},
+				],
+				dom: 'Bfrtip',
+				buttons: [
+					{ extend: 'copyHtml5', text: 'Kopier' },
+					{ extend: 'excelHtml5', text: 'Excel' },
+					{ extend: 'csvHtml5', text: 'CSV' }
+				]
 			});
 
-			console.log(response);
+			$modal.find('#body').html($table);
+			$table.show();
 		});
-
-
 	}
 
 	/**
@@ -51,18 +126,41 @@ var CONNECT_MODALS = (function () {
 	 * Safe to use orgList here (otherwise button to show the modal would not exist)
 	 * @param $modal
 	 */
-	function buildOrgListModal($modal) {
+	function buildOrgsListingModal($modal) {
 		$modal.find('#title').html("Registrerte orgs på tjenesten");
-		$modal.find('.modal-dialog').addClass('modal-sm').removeClass('modal-lg');
+		$modal.find('.modal-dialog').removeClass('modal-sm').removeClass('modal-lg');
+		$modal.find('#body').html("<p>Henter...</p>");
 		var $table = $('#orgsTable').clone();
-		$table.find('tbody').html("");
-
+		// Default time period to show for stats when an org link is clicked
 		var from = UTILS.timestampMinusDays(CONNECT.defaultDaysInPeriod())
 		var to = UTILS.timestampNow();
-
-		$.each(CONNECT_UI.orgList(), function (index, orgName) {
-			$table.find('tbody').append("<tr><td><button class='btn btn-link xhrTrigger' data-function='updateSelectedOrgSection' data-from='" + from + "' data-to='" + to + "' data-org='" + orgName + "'>" + orgName + "</button></td></tr>");
+		// Convert DataTables data into an array of objects
+		var data = [];
+		$.each(CONNECT_UI.orgList(), function (orgName, userCount) {
+			data.push( { "org" : "<button class='btn btn-link xhrTrigger' data-function='updateSelectedOrgSection' data-from='" + from + "' data-to='" + to + "' data-org='" + orgName + "'>" + orgName + "</button>", "count" : userCount} );
 		});
+
+		$($table.find('#orgsDataTable')).DataTable({
+			data: data,
+			language : CONFIG.DATATABLES_LANGUAGE(),
+			columns: [
+				{
+					"data": "org",
+					"defaultContent": " <span class='text-red'>- mangler -</span> "
+				},
+				{
+					"data": "count",
+					"defaultContent": " <span class='text-red'>- mangler -</span> "
+				}
+			],
+			dom: 'Bfrtip',
+			buttons: [
+				{ extend: 'copyHtml5', text: 'Kopier' },
+				{ extend: 'excelHtml5', text: 'Excel' },
+				{ extend: 'csvHtml5', text: 'CSV' }
+			]
+		});
+
 		$modal.find('#body').html($table);
 		$table.show();
 	}
@@ -89,4 +187,5 @@ var CONNECT_MODALS = (function () {
 			return null;
 		}
 	}
-})();
+})
+();
