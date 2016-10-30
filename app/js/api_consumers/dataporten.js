@@ -8,6 +8,7 @@
 var DATAPORTEN = (function () {
 	// userinfo/groups/role
 	var USER = {};
+	var AC_SESSION_COOKIE = null;
 
 	// Autorun
 	var XHR_USER = _getUserInfoXHR(),
@@ -109,12 +110,20 @@ var DATAPORTEN = (function () {
 		}).fail(function (jqXHR, textStatus, error) {});
 	}
 
+	/**
+	 * Let the serverside API work out user's access/role. NOTE: This endpoint will also
+	 * return a TOKEN required to call any other API routes.
+	 *
+	 * @returns {*}
+	 * @private
+	 */
 	function _getUserServiceAccessXHR() {
 		return DP_AUTH.jso().ajax({
 			url: DP_AUTH.config().api_endpoints.adobeconnect + "service/access/",
 			datatype: 'json'
 		})
 			.pipe(function (response) {
+				AC_SESSION_COOKIE = response.data.access.ac_token
 				return response.data;
 			})
 			.fail(function (jqXHR, textStatus, error) {});
@@ -136,6 +145,10 @@ var DATAPORTEN = (function () {
 		},
 		affiliation: function () {
 			return USER.affiliation.toLowerCase();
+		},
+		AC_TOKEN: function () {
+			return AC_SESSION_COOKIE;
+
 		}
 	}
 })();

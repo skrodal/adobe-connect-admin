@@ -14,13 +14,13 @@
 				<div class="box-header with-border">
 					<!-- <h3 class="box-title">Bruksmønster i periode for <span class="selectedOrg"></span></h3> -->
 					<h3 class="box-title">Bruksmønster i periode <sup class="text-muted text-sm"><span class="orgStatsPeriodDays"><!--></span> dager</sup></h3>
-					<div class="input-daterange input-group" id="datepicker" style="width: 250px;">
+					<div class="input-daterange input-group orgPeriodRangeInput" id="datepicker" style="width: 250px;">
 						<span class="input-group-addon">fra </span>
 					    <input type="text" class="input-sm form-control orgPeriodFrom" name="start"/>
 					    <span class="input-group-addon"> til </span>
 					    <input type="text" class="input-sm form-control orgPeriodTo" name="end"/>
 						<span class="input-group-addon">
-							<button id="btnUpdateOrgPeriod" class="btn btn-xs btn-link ion ion-ios-refresh disabled"></button>
+							<button id="btnUpdateOrgPeriod" class="btn btn-sm no-padding btn-link ion text-aqua ion-refresh disabled"></button>
 						</span>
 					</div>
 

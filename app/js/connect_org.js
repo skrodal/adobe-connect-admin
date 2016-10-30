@@ -26,7 +26,7 @@ var CONNECT_ORG = (function () {
 	 * Datepicker: When FROM date changed
 	 */
 	$('.orgPeriodFrom').datepicker()
-		.on('changeDate', function(e) {
+		.on('changeDate', function (e) {
 			$('.orgStatsPeriodDays').html(Math.abs(moment($('.orgPeriodFrom').datepicker('getDate')).diff(moment($('.orgPeriodTo').datepicker('getDate')), 'days')) + 1);
 			$('#btnUpdateOrgPeriod').removeClass('disabled');
 		});
@@ -34,7 +34,7 @@ var CONNECT_ORG = (function () {
 	 * Datepicker: When TO date changed
 	 */
 	$('.orgPeriodTo').datepicker()
-		.on('changeDate', function(e) {
+		.on('changeDate', function (e) {
 			$('.orgStatsPeriodDays').html(Math.abs(moment($('.orgPeriodFrom').datepicker('getDate')).diff(moment($('.orgPeriodTo').datepicker('getDate')), 'days')) + 1);
 			$('#btnUpdateOrgPeriod').removeClass('disabled');
 		});
@@ -42,12 +42,17 @@ var CONNECT_ORG = (function () {
 	/**
 	 * Datepicker: When update button clicked
 	 */
-	$('#btnUpdateOrgPeriod').on('click', function (){
-		$('#btnUpdateOrgPeriod').addClass('disabled');
-		var from = moment($('.orgPeriodFrom').datepicker('getDate')).unix();
-		var to = moment($('.orgPeriodTo').datepicker('getDate')).unix();
-		// Update chart and stats
-		updateSelectedOrgSection(from, to, selectedOrgStatsData.requested_org);
+	$('#btnUpdateOrgPeriod').on('click', function () {
+		if (!$('#btnUpdateOrgPeriod').hasClass('disabled')) {
+			$('#btnUpdateOrgPeriod').addClass('disabled');
+			var from = moment($('.orgPeriodFrom').datepicker('getDate')).unix();
+			var to = moment($('.orgPeriodTo').datepicker('getDate')).unix();
+			// Update chart and stats
+			updateSelectedOrgSection(from, to, selectedOrgStatsData.requested_org);
+		} else {
+			$('.orgPeriodRangeInput').addClass('pulsate');
+			setTimeout(function(){ $('.orgPeriodRangeInput').removeClass('pulsate'); }, 1000);
+		}
 	});
 
 
@@ -79,8 +84,8 @@ var CONNECT_ORG = (function () {
 			// Calculate this org's percentage of users
 			$.when(CONNECT.usersOrgCountXHR(org)).done(function (response) {
 				$('.selectedOrgUserCount').html(response);
-				var percentage = parseInt(response) * 100 / parseInt( $('.usersCount').html() );
-				$('.selectedOrgUserCountPercentage').css('width', percentage + '%' );
+				var percentage = parseInt(response) * 100 / parseInt($('.usersCount').html());
+				$('.selectedOrgUserCountPercentage').css('width', percentage + '%');
 			});
 
 			$('#sectionOrgInfo').find('.ajax').fadeOut();

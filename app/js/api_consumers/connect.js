@@ -73,10 +73,22 @@ var CONNECT = (function () {
 	}
 
 
+	/**
+	 * MUST have an access (JWT) token to make calls!
+	 *
+	 * A token is retrieved and stored (DATAPORTEN.AC_TOKEN()) by Dataporten's initial call to _getUserServiceAccessXHR().
+	 *
+	 * @param route
+	 * @returns {*}
+	 * @private
+	 */
 	function _callConnectAPI(route){
+		// TODO: Check isset AC_TOKEN, if false, wipetokens and start over...
+
 		return DP_AUTH.jso().ajax({
 			url: DP_AUTH.config().api_endpoints.adobeconnect + route,
-			datatype: 'json'
+			datatype: 'json',
+			data: { ac_token: DATAPORTEN.AC_TOKEN() }
 		})
 			.pipe(function (response) {
 				return response.data;

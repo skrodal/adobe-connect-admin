@@ -46,11 +46,16 @@ var CONNECT_GLOBAL = (function () {
 	 * Datepicker: When update button clicked
 	 */
 	$('#btnUpdateGlobalPeriod').on('click', function (){
-		$('#btnUpdateGlobalPeriod').addClass('disabled');
-		var from = moment($('.globalPeriodFrom').datepicker('getDate')).unix();
-		var to = moment($('.globalPeriodTo').datepicker('getDate')).unix();
-		// Update chart and stats
-		updateGlobalSection(from, to);
+		if(!$('#btnUpdateGlobalPeriod').hasClass('disabled')){
+			$('#btnUpdateGlobalPeriod').addClass('disabled');
+			var from = moment($('.globalPeriodFrom').datepicker('getDate')).unix();
+			var to = moment($('.globalPeriodTo').datepicker('getDate')).unix();
+			// Update chart and stats
+			updateGlobalSection(from, to);
+		}  else {
+			$('.globalPeriodRangeInput').addClass('pulsate');
+			setTimeout(function(){ $('.globalPeriodRangeInput').removeClass('pulsate'); }, 1000);
+		}
 	});
 
 	/**
