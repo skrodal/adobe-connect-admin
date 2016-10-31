@@ -40,18 +40,18 @@ The organisation view allows the logged on user to retrieve and observe Adobe Co
 
 ![Preview](docs/ConnectAdmin_OrgView.png)
 
- **Role `OrgAdmin`:**
+**Role `OrgAdmin`:**
  
- Elevated users may also export (by means of print, copy, Excel, CSV):  
+Elevated users may also export (by means of print, copy, Excel, CSV):  
  
  - the statistical information displayed in the chart
  - complete listing of all users at their home org
  
  ![Preview](docs/ConnectAdmin_Export.png)
  
- **Role `SuperAdmin`:**
+**Role `SuperAdmin`:**
  
- Further to the privileges of the `OrgAdmin`, the `SuperAdmin` may also list/export all subscribing orgs and view/export stats/users pertaining to each org. 
+Further to the privileges of the `OrgAdmin`, the `SuperAdmin` may also list/export all subscribing orgs and view/export stats/users pertaining to each org. 
    
 ### View: Global (service)
    
@@ -66,8 +66,6 @@ The client
 - must request access to the [`Adobe Connect Web Services Proxy`](https://github.com/skrodal/adobe-connect-api) API from UNINETT (in Dataporten), with the following scopes: `gk_adobe-connect` `gk_adobe-connect_admin`
  
 The client also requires the Colfax font library (not included in this repo due to license restrictions).
-
--  
 
 ## 3rd parties
 
