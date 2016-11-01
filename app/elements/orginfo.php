@@ -27,8 +27,7 @@
 					<!-- OrgAdmins only -->
 					<div id="orgStatsConfigMenu" class="box-tools pull-right collapse">
 						<div class="btn-group">
-							<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-wrench"></i></button>
+							<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i> Eksport</button>
 							<ul class="dropdown-menu" role="menu">
 								<!-- SuperAdmins only -->
 								<li class="btnShowOrgListing collapse">
